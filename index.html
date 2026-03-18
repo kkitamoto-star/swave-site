@@ -233,18 +233,18 @@
       text-transform: uppercase;
       color: rgba(255,255,255,0.55);
     }
-    .concept-supervised a {
+    .alo-trigger {
       color: var(--white);
-      text-decoration: none;
       border-bottom: 1px solid rgba(255,255,255,0.4);
-      transition: color 0.2s, border-color 0.2s;
+      cursor: pointer;
       position: relative;
+      transition: color 0.2s, border-color 0.2s;
     }
-    .concept-supervised a:hover {
+    .alo-trigger:hover {
       color: var(--blue);
       border-color: var(--blue);
     }
-    .concept-supervised a .alo-popup {
+    .alo-trigger .alo-popup {
       position: absolute;
       bottom: calc(100% + 16px);
       left: 50%;
@@ -258,14 +258,18 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.6);
       z-index: 500;
     }
-    .concept-supervised a .alo-popup img {
+    .alo-trigger .alo-popup img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
       display: block;
     }
-    .concept-supervised a:hover .alo-popup {
+    .alo-trigger .alo-popup a {
+      display: block;
+      line-height: 0;
+    }
+    .alo-trigger:hover .alo-popup,
+    .alo-trigger.active .alo-popup {
       opacity: 1;
+      pointer-events: auto;
       transform: translateX(-50%) translateY(0);
     }
 
@@ -804,10 +808,14 @@
       </p>
       <p class="concept-supervised">
         Supervised by
-        <a href="https://www.instagram.com/alo_official0403/" target="_blank" rel="noopener">
+        <span class="alo-trigger" id="aloTrigger">
           Alo
-          <span class="alo-popup"><img src="sozai/alo_member/SWV_1808-Edit-mono.jpg" alt="Alo members"></span>
-        </a>
+          <span class="alo-popup" id="aloPopup">
+            <a href="https://www.instagram.com/alo_official0403/" target="_blank" rel="noopener">
+              <img src="sozai/alo_member/SWV_1808-Edit-mono.jpg" alt="Alo members">
+            </a>
+          </span>
+        </span>
       </p>
     </div>
   </section>
@@ -1045,6 +1053,23 @@
   </footer>
 
   <script>
+    // Aloポップアップ（スマホ用タップ対応）
+    const aloTrigger = document.getElementById('aloTrigger');
+    if (aloTrigger) {
+      aloTrigger.addEventListener('click', function(e) {
+        const isMobile = window.matchMedia('(hover: none)').matches;
+        if (isMobile) {
+          e.stopPropagation();
+          this.classList.toggle('active');
+        }
+      });
+      document.addEventListener('click', function(e) {
+        if (!aloTrigger.contains(e.target)) {
+          aloTrigger.classList.remove('active');
+        }
+      });
+    }
+
     // モーダル制御
     function openModal(id) {
       document.getElementById(id).classList.add('open');
