@@ -52,21 +52,8 @@
       letter-spacing: 0.15em;
       color: var(--white);
       position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
     }
     .nav-logo span { color: var(--blue); }
-    .nav-supervised {
-      font-family: 'Josefin Sans', sans-serif;
-      font-size: 8px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      font-weight: 300;
-      text-decoration: none;
-    }
-    .nav-supervised:hover { color: rgba(255,255,255,0.75); }
     .nav-links {
       display: flex;
       gap: 32px;
@@ -237,22 +224,22 @@
       font-weight: 700;
     }
     .concept-supervised {
-      margin-top: 40px;
+      margin-top: 48px;
       font-family: 'Josefin Sans', sans-serif;
-      font-size: 10px;
-      letter-spacing: 0.22em;
+      font-size: 11px;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.55);
     }
     .concept-supervised a {
-      color: rgba(255,255,255,0.55);
+      color: var(--white);
       text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.4);
       transition: color 0.2s, border-color 0.2s;
     }
     .concept-supervised a:hover {
-      color: var(--white);
-      border-color: rgba(255,255,255,0.6);
+      color: var(--blue);
+      border-color: var(--blue);
     }
 
     /* ===================== LINEUP ===================== */
@@ -734,10 +721,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">
-      <div><span>S</span>WAVE</div>
-      <a class="nav-supervised" href="https://www.instagram.com/alo_official0403/" target="_blank" rel="noopener">Supervised by Alo, Omotesando</a>
-    </div>
+    <div class="nav-logo"><span>S</span>WAVE</div>
     <ul class="nav-links">
       <li><a href="#lineup">Lineup</a></li>
       <li><a href="#points">Features</a></li>
