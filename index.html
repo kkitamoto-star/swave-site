@@ -47,13 +47,13 @@
       pointer-events: none;
     }
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 0.15em;
-      color: var(--white);
       position: relative;
     }
-    .nav-logo span { color: var(--blue); }
+    .nav-logo-img {
+      height: 28px;
+      width: auto;
+      display: block;
+    }
     .nav-links {
       display: flex;
       gap: 32px;
@@ -721,7 +721,9 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo"><span>S</span>WAVE</div>
+    <div class="nav-logo">
+      <img src="sozai/logo/swave_logo_white.png" alt="SWAVE" class="nav-logo-img">
+    </div>
     <ul class="nav-links">
       <li><a href="#lineup">Lineup</a></li>
       <li><a href="#points">Features</a></li>
