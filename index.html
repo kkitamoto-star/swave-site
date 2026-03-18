@@ -238,10 +238,34 @@
       text-decoration: none;
       border-bottom: 1px solid rgba(255,255,255,0.4);
       transition: color 0.2s, border-color 0.2s;
+      position: relative;
     }
     .concept-supervised a:hover {
       color: var(--blue);
       border-color: var(--blue);
+    }
+    .concept-supervised a .alo-popup {
+      position: absolute;
+      bottom: calc(100% + 16px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      width: 260px;
+      border-radius: 4px;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    .concept-supervised a .alo-popup img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .concept-supervised a:hover .alo-popup {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     /* ===================== LINEUP ===================== */
@@ -779,7 +803,10 @@
       </p>
       <p class="concept-supervised">
         Supervised by
-        <a href="https://www.instagram.com/alo_official0403/" target="_blank" rel="noopener">Alo</a>
+        <a href="https://www.instagram.com/alo_official0403/" target="_blank" rel="noopener">
+          Alo
+          <span class="alo-popup"><img src="sozai/alo_member/SWV_1808-Edit-mono.jpg" alt="Alo members"></span>
+        </a>
       </p>
     </div>
   </section>
