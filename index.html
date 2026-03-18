@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWAVE — STYLING GREASE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0D0D0D;
+      --white: #FFFFFF;
+      --blue:  #3BBAE8;
+      --yellow:#D4C84A;
+      --red:   #D63B3B;
+      --gray:  #888888;
+      --light: #F0F0EE;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ===================== NAV ===================== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      mix-blend-mode: normal;
+    }
+    nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      position: relative;
+    }
+    .nav-logo span { color: var(--blue); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      position: relative;
+    }
+    .nav-links a {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-amazon {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      background: var(--blue);
+      padding: 8px 18px;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .nav-amazon:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+    .nav-amazon svg {
+      width: 12px;
+      height: 12px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center top;
+      filter: brightness(0.55);
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide { background-position: center 30%; }
+
+    /* スライドインジケーター */
+    .hero-indicators {
+      position: absolute;
+      bottom: 36px;
+      right: 48px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .indicator {
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s;
+    }
+    .indicator.active {
+      background: var(--white);
+      width: 48px;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(13,13,13,0.5) 70%,
+        rgba(13,13,13,1) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      padding: 0 48px 80px;
+      max-width: 900px;
+    }
+    .hero-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(64px, 10vw, 120px);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+    .hero-title span { color: var(--white); }
+    .hero-catch {
+      font-size: clamp(16px, 2.5vw, 22px);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+    .hero-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+    }
+
+    /* ===================== CONCEPT ===================== */
+    .concept {
+      padding: 120px 48px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .concept-text {}
+    .section-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .concept-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+    }
+    .concept-body {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 2.2;
+      color: rgba(255,255,255,0.7);
+    }
+    .concept-body strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    /* ===================== LINEUP ===================== */
+    .lineup {
+      padding: 80px 48px 120px;
+    }
+    .lineup-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .lineup-header .section-label { justify-content: center; display: flex; }
+    .lineup-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      letter-spacing: 0.08em;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      position: relative;
+      background: #111;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover { transform: translateY(-4px); }
+
+    .product-card-inner {
+      padding: 48px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 520px;
+    }
+
+    .product-badge {
+      display: inline-block;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 32px;
+      width: fit-content;
+    }
+    .card-blue  .product-badge { background: var(--blue);   color: var(--black); }
+    .card-yellow .product-badge { background: var(--yellow); color: var(--black); }
+    .card-red   .product-badge { background: var(--red);    color: var(--white); }
+
+    .product-img-wrap {
+      width: 100%;
+      margin-bottom: 28px;
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img-wrap img {
+      transform: scale(1.03);
+    }
+
+    .product-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+    .card-blue   .product-name-en { color: var(--blue); }
+    .card-yellow .product-name-en { color: var(--yellow); }
+    .card-red    .product-name-en { color: var(--red); }
+
+    .product-name-ja {
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .product-catch {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .product-desc {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 20px;
+    }
+
+    .product-hold {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .hold-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .hold-stars { display: flex; gap: 3px; }
+    .star {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+    }
+    .card-blue   .star.on,
+    .modal-blue  .star.on { background: var(--blue); }
+    .card-yellow .star.on,
+    .modal-yellow .star.on { background: var(--yellow); }
+    .card-red    .star.on,
+    .modal-red   .star.on { background: var(--red); }
+
+    .product-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+    }
+    .product-price strong {
+      font-size: 20px;
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    /* ===================== POINTS ===================== */
+    .points {
+      background: var(--light);
+      color: var(--black);
+      padding: 120px 48px;
+    }
+    .points-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .points-header .section-label { color: var(--blue); justify-content: center; display: flex; }
+    .points-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      letter-spacing: 0.08em;
+      color: var(--black);
+    }
+
+    .points-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .point-item {}
+    .point-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      line-height: 1;
+      color: rgba(0,0,0,0.06);
+      margin-bottom: -16px;
+    }
+    .point-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      border-left: 3px solid var(--blue);
+      padding-left: 12px;
+    }
+    .point-body {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 2;
+      color: #555;
+      padding-left: 15px;
+    }
+
+    /* ===================== ATMOSPHERE ===================== */
+    .atmosphere {
+      position: relative;
+      height: 600px;
+      overflow: hidden;
+    }
+    .atmosphere img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.6);
+    }
+    .atmosphere-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .atmosphere-catch {
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 16px;
+    }
+    .atmosphere-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 7vw, 88px);
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+    }
+
+    /* ===================== SPEC ===================== */
+    .spec {
+      padding: 100px 48px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .spec .section-label { justify-content: center; display: flex; }
+    .spec-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 0.08em;
+      margin-bottom: 48px;
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .spec-table tr {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .spec-table td {
+      padding: 16px 0;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .spec-table td:first-child {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      width: 140px;
+    }
+
+    /* ===================== MODAL ===================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 24px;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: #111;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+    .modal-overlay.open .modal {
+      transform: translateY(0);
+    }
+    .modal-img {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-body {
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+      z-index: 10;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-badge {
+      display: inline-block;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+    .modal-blue  .modal-badge { background: var(--blue);   color: var(--black); }
+    .modal-yellow .modal-badge { background: var(--yellow); color: var(--black); }
+    .modal-red   .modal-badge { background: var(--red);    color: var(--white); }
+    .modal-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .modal-blue  .modal-name { color: var(--blue); }
+    .modal-yellow .modal-name { color: var(--yellow); }
+    .modal-red   .modal-name { color: var(--red); }
+    .modal-name-ja {
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+    .modal-catch {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .modal-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 2;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .modal-hold {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .modal-hold .hold-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .modal-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    .modal-price span {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+    }
+    .modal-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+    }
+    .modal-btn:hover { opacity: 0.8; }
+    .modal-btn-amazon { background: var(--blue); color: var(--black); }
+    .modal-btn-soon {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.3);
+      cursor: default;
+    }
+    .modal-btn-soon:hover { opacity: 1; }
+
+    /* カードにポインター */
+    .product-card { cursor: pointer; }
+
+    @media (max-width: 700px) {
+      .modal { grid-template-columns: 1fr; }
+      .modal-img { min-height: 250px; max-height: 300px; }
+      .modal-body { padding: 32px 24px; }
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.15em;
+    }
+    .footer-logo span { color: var(--blue); }
+    .footer-copy {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+    }
+    .footer-made {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 0 24px 60px; }
+      .concept {
+        grid-template-columns: 1fr;
+        padding: 80px 24px;
+        gap: 48px;
+      }
+      .lineup { padding: 80px 24px; }
+      .products { grid-template-columns: 1fr; gap: 4px; }
+      .product-card-inner { min-height: auto; }
+      .points { padding: 80px 24px; }
+      .points-grid { grid-template-columns: 1fr; gap: 40px; }
+      .spec { padding: 80px 24px; }
+      footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo"><span>S</span>WAVE</div>
+    <ul class="nav-links">
+      <li><a href="#lineup">Lineup</a></li>
+      <li><a href="#points">Features</a></li>
+      <li><a href="#spec">Spec</a></li>
+      <li><a href="https://www.instagram.com/swave.style/" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a></li>
+    </ul>
+    <a class="nav-amazon" href="https://www.amazon.co.jp/%E3%80%90%E8%A1%A8%E5%8F%82%E9%81%93%E4%BA%BA%E6%B0%97%E7%BE%8E%E5%AE%B9%E5%AE%A4%E7%9B%A3%E4%BF%AE%E3%80%91-SWAVE-GREASE-%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AA%E3%83%B3%E3%82%B0%E5%89%A4-%E6%B4%97%E3%81%84%E6%B5%81%E3%81%97%E3%82%84%E3%81%99%E3%81%84/dp/B0FXJX5KC3" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.958 10.09c0 1.232.029 2.256-.591 3.351-.502.891-1.301 1.438-2.186 1.438-1.214 0-1.922-.924-1.922-2.292 0-2.692 2.415-3.182 4.699-3.182v.685zm3.186 7.705c-.209.189-.512.201-.745.074-1.047-.872-1.236-1.276-1.814-2.106-1.732 1.767-2.96 2.296-5.209 2.296-2.66 0-4.731-1.641-4.731-4.925 0-2.565 1.391-4.309 3.37-5.164 1.715-.754 4.11-.891 5.942-1.099v-.41c0-.753.06-1.642-.384-2.294-.385-.579-1.124-.82-1.775-.82-1.205 0-2.277.618-2.54 1.897-.054.285-.261.567-.547.581l-3.064-.333c-.259-.056-.548-.266-.472-.662C5.57 2.357 8.763 1.5 11.623 1.5c1.46 0 3.369.389 4.52 1.495 1.459 1.36 1.32 3.173 1.32 5.149v4.663c0 1.402.582 2.017 1.129 2.774.193.271.235.595-.01.796l-2.438 2.418zm3.286 2.394c-.515.378-1.261.203-1.802-.235-2.535-2.107-2.977-3.084-4.362-5.092-4.171 4.251-7.126 5.523-12.537 5.523C.605 20.385-1.5 17.44-1.5 13.938c0-4.406 2.793-7.304 7.004-8.765.218-.073.382.143.253.327-1.022 1.468-1.625 3.254-1.625 5.248 0 2.565 1.197 4.832 3.541 5.699.613.225 1.276.315 1.931.315 2.187 0 4.243-.888 5.693-2.523.241-.274.591-.188.777.089.701 1.043 1.323 2.127 2.046 3.138.238.334.18.617-.088.823z"/></svg>
+      Buy on Amazon
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-slides">
+      <div class="hero-slide active"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+    </div>
+    <div class="hero-indicators">
+      <div class="indicator active" onclick="goToSlide(0)"></div>
+      <div class="indicator" onclick="goToSlide(1)"></div>
+      <div class="indicator" onclick="goToSlide(2)"></div>
+      <div class="indicator" onclick="goToSlide(3)"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-label">Styling Grease — Made in Japan</p>
+      <h1 class="hero-title"><span>S</span>WAVE</h1>
+      <p class="hero-catch">濡れて馴染む、キメて残る。</p>
+      <p class="hero-sub">どんな場面でも、どんなスタイルでも。<br>万能かつ"適応"する、新世代のグリース。</p>
+    </div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section class="concept">
+    <div class="concept-text">
+      <p class="section-label" style="color:var(--blue)">— Concept</p>
+      <h2 class="concept-heading">NEW<br>GENERATION<br>GREASE.</h2>
+      <p class="concept-body">
+        これひとつで、<strong>1日続く艶と自在な動き</strong>を実現。<br>
+        プロフェッショナルにも。日常のスタイリングにも。<br><br>
+        セットに時間をかけたくない方も、<br>
+        ワンランク上のセットをしたい方も<br>
+        <strong>これひとつで完結。</strong><br><br>
+        これまでのグリースを、過去形にする。<br>
+        それが、SWAVE。
+      </p>
+    </div>
+  </section>
+
+  <!-- LINEUP -->
+
+  <section class="lineup" id="lineup">
+    <div class="lineup-header">
+      <p class="section-label" style="color:var(--yellow)">— Product Lineup</p>
+      <h2 class="lineup-heading">3 TYPES</h2>
+    </div>
+
+    <div class="products">
+
+      <!-- ADAPT GREASE -->
+      <div class="product-card card-blue" onclick="openModal('modal-adapt')" style="cursor:pointer">
+        <div class="product-card-inner">
+          <span class="product-badge">Adapt</span>
+          <div class="product-img-wrap">
+            <img src="sozai/product/3types/adapt_grease.jpg" alt="ADAPT GREASE">
+          </div>
+          <div class="product-name product-name-en">ADAPT GREASE</div>
+          <div class="product-name-ja">アダプトグリース</div>
+          <div class="product-catch">束感、艶感、思いのまま。</div>
+          <p class="product-desc">どんな場面でも"適応"する、万能かつ新世代のグリース。</p>
+          <div class="product-hold">
+            <span class="hold-label">Hold</span>
+            <div class="hold-stars">
+              <div class="star on"></div>
+              <div class="star on"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+            </div>
+          </div>
+          <div class="product-price">NET 160g &nbsp; <strong>¥2,750</strong> <span style="font-size:10px;color:var(--gray)">税込</span></div>
+        </div>
+      </div>
+
+      <!-- OIL GREASE -->
+      <div class="product-card card-yellow" onclick="openModal('modal-oil')" style="cursor:pointer">
+        <div class="product-card-inner">
+          <span class="product-badge">Oil</span>
+          <div class="product-img-wrap">
+            <img src="sozai/product/3types/oil_grease.jpg" alt="OIL GREASE">
+          </div>
+          <div class="product-name product-name-en">OIL GREASE</div>
+          <div class="product-name-ja">オイルグリース</div>
+          <div class="product-catch">エアリーに、濡れる。</div>
+          <p class="product-desc">艶とキープの、新しいバランス。</p>
+          <div class="product-hold">
+            <span class="hold-label">Hold</span>
+            <div class="hold-stars">
+              <div class="star on"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+            </div>
+          </div>
+          <div class="product-price">NET 160g &nbsp; <strong>¥2,750</strong> <span style="font-size:10px;color:var(--gray)">税込</span></div>
+        </div>
+      </div>
+
+      <!-- FREEZE GREASE -->
+      <div class="product-card card-red" onclick="openModal('modal-freeze')" style="cursor:pointer">
+        <div class="product-card-inner">
+          <span class="product-badge">Freeze</span>
+          <div class="product-img-wrap">
+            <img src="sozai/product/3types/freeze_grease.jpg" alt="FREEZE GREASE">
+          </div>
+          <div class="product-name product-name-en">FREEZE GREASE</div>
+          <div class="product-name-ja">フリーズグリース</div>
+          <div class="product-catch">艶束、自在。なのに最硬。</div>
+          <p class="product-desc">最硬クラスのホールド力で、完成形を一日中キープ。</p>
+          <div class="product-hold">
+            <span class="hold-label">Hold</span>
+            <div class="hold-stars">
+              <div class="star on"></div>
+              <div class="star on"></div>
+              <div class="star on"></div>
+              <div class="star on"></div>
+              <div class="star on"></div>
+            </div>
+          </div>
+          <div class="product-price">NET 160g &nbsp; <strong>¥2,750</strong> <span style="font-size:10px;color:var(--gray)">税込</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- POINTS -->
+  <section class="points" id="points">
+    <div class="points-header">
+      <p class="section-label" style="color:var(--red)">— Why SWAVE</p>
+      <h2 class="points-heading">3 POINTS</h2>
+    </div>
+    <div class="points-grid">
+      <div class="point-item">
+        <div class="point-num">01</div>
+        <h3 class="point-title">立ち上がり・ウェット感を<br>長時間キープ</h3>
+        <p class="point-body">セット直後のキメたスタイルをそのまま維持。時間が経つと自然に馴染んでさらにかっこよく仕上がる。</p>
+      </div>
+      <div class="point-item">
+        <div class="point-num">02</div>
+        <h3 class="point-title">ベタつかずサラッと<br>洗い落とせる</h3>
+        <p class="point-body">従来のグリースの悩みを解消。シャンプーなしでも簡単に洗い流せる軽やかな使用感。</p>
+      </div>
+      <div class="point-item">
+        <div class="point-num">03</div>
+        <h3 class="point-title">一日キープできる<br>洗練された爽やかな香り</h3>
+        <p class="point-body">スタイリングしながら纏う、上品で爽やかなフレグランス。朝から夜まで持続。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATMOSPHERE -->
+  <section class="atmosphere">
+    <img id="atmo-img" src="sozai/main_visual/mv_001.jpg" alt="どんなスタイルでも">
+    <div class="atmosphere-text">
+      <p class="atmosphere-catch">どんなスタイルでも</p>
+      <h2 class="atmosphere-main">濡れて馴染む、<br>キメて残る。</h2>
+    </div>
+  </section>
+
+  <!-- SPEC -->
+  <section class="spec" id="spec">
+    <p class="section-label" id="spec-label">— Product Spec</p>
+    <h2 class="spec-heading">SPEC</h2>
+    <table class="spec-table">
+      <tr>
+        <td>Brand</td>
+        <td>SWAVE（スウェーブ）</td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>Adapt Grease / Oil Grease / Freeze Grease</td>
+      </tr>
+      <tr>
+        <td>Contents</td>
+        <td>160g</td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td>¥2,750（税込）</td>
+      </tr>
+      <tr>
+        <td>Made in</td>
+        <td>Japan</td>
+      </tr>
+      <tr>
+        <td>Vendor</td>
+        <td>株式会社安永</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- MODALS -->
+
+  <!-- ADAPT GREASE -->
+  <div class="modal-overlay modal-blue" id="modal-adapt" onclick="closeModalOutside(event, this)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('modal-adapt')">×</button>
+      <img class="modal-img" src="sozai/product/3types/adapt_grease.jpg" alt="ADAPT GREASE">
+      <div class="modal-body">
+        <span class="modal-badge">Adapt</span>
+        <div class="modal-name">ADAPT GREASE</div>
+        <div class="modal-name-ja">アダプトグリース</div>
+        <div class="modal-catch">束感、艶感、思いのまま。</div>
+        <p class="modal-desc">どんな場面でも、どんなスタイルでも。<br>万能かつ"適応"する、新世代のグリース。<br><br>これひとつで、1日続く艶と自在な動きを実現。<br>プロフェッショナルにも。日常のスタイリングにも。<br><br>これまでのグリースを、過去形にする。<br>それが、SWAVE。</p>
+        <div class="modal-hold">
+          <span class="hold-label">Hold</span>
+          <div class="hold-stars">
+            <div class="star on"></div><div class="star on"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+          </div>
+        </div>
+        <div class="modal-price">¥2,750 <span>税込 / NET 160g</span></div>
+        <a class="modal-btn modal-btn-amazon" href="https://www.amazon.co.jp/%E3%80%90%E8%A1%A8%E5%8F%82%E9%81%93%E4%BA%BA%E6%B0%97%E7%BE%8E%E5%AE%B9%E5%AE%A4%E7%9B%A3%E4%BF%AE%E3%80%91-SWAVE-GREASE-%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%AA%E3%83%B3%E3%82%B0%E5%89%A4-%E6%B4%97%E3%81%84%E6%B5%81%E3%81%97%E3%82%84%E3%81%99%E3%81%84/dp/B0FXJX5KC3" target="_blank" rel="noopener">Buy on Amazon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- OIL GREASE -->
+  <div class="modal-overlay modal-yellow" id="modal-oil" onclick="closeModalOutside(event, this)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('modal-oil')">×</button>
+      <img class="modal-img" src="sozai/product/3types/oil_grease.jpg" alt="OIL GREASE">
+      <div class="modal-body">
+        <span class="modal-badge">Oil</span>
+        <div class="modal-name">OIL GREASE</div>
+        <div class="modal-name-ja">オイルグリース</div>
+        <div class="modal-catch">エアリーに、濡れる。</div>
+        <p class="modal-desc">オイルの艶は美しい。<br>でも、それだけでは少し頼りない。<br><br>グリースの力は心強い。<br>けれど、ときに強すぎる。<br><br>自然な艶と、さりげない束感。<br>動けるのに、崩れない。<br>男女を問わず、自然になじむ。<br><br>艶とキープの、新しいバランス。</p>
+        <div class="modal-hold">
+          <span class="hold-label">Hold</span>
+          <div class="hold-stars">
+            <div class="star on"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+          </div>
+        </div>
+        <div class="modal-price">¥2,750 <span>税込 / NET 160g</span></div>
+        <a class="modal-btn modal-btn-soon">Coming Soon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FREEZE GREASE -->
+  <div class="modal-overlay modal-red" id="modal-freeze" onclick="closeModalOutside(event, this)">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('modal-freeze')">×</button>
+      <img class="modal-img" src="sozai/product/3types/freeze_grease.jpg" alt="FREEZE GREASE">
+      <div class="modal-body">
+        <span class="modal-badge">Freeze</span>
+        <div class="modal-name">FREEZE GREASE</div>
+        <div class="modal-name-ja">フリーズグリース</div>
+        <div class="modal-catch">艶束、自在。なのに最硬。</div>
+        <p class="modal-desc">ここまで強くていいのか、と思うほどのホールド力。<br>それでいて、スタイリング中は思いのまま動く。<br><br>キメた形を崩さず、一日中完成形をキープ。<br>どんなスタイルも、思い通りに仕上がる。<br><br>妥協しない人のための、最強グリース。</p>
+        <div class="modal-hold">
+          <span class="hold-label">Hold</span>
+          <div class="hold-stars">
+            <div class="star on"></div><div class="star on"></div><div class="star on"></div><div class="star on"></div><div class="star on"></div>
+          </div>
+        </div>
+        <div class="modal-price">¥2,750 <span>税込 / NET 160g</span></div>
+        <a class="modal-btn modal-btn-soon">Coming Soon</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span>S</span>WAVE</div>
+    <div class="footer-copy">© SWAVE. All rights reserved.</div>
+    <div class="footer-made">Made in Japan Styling</div>
+  </footer>
+
+  <script>
+    // モーダル制御
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeModalOutside(e, overlay) {
+      if (e.target === overlay) closeModal(overlay.id);
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => {
+          m.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+
+    // mv_001〜018: モデル写真 / mv_019: 商品写真（除外）
+    const ALL_PHOTOS = [
+      'sozai/main_visual/mv_001.jpg',
+      'sozai/main_visual/mv_002.jpg',
+      'sozai/main_visual/mv_003.jpg',
+      'sozai/main_visual/mv_004.jpg',
+      'sozai/main_visual/mv_005.jpg',
+      'sozai/main_visual/mv_006.jpg',
+      'sozai/main_visual/mv_007.jpg',
+      'sozai/main_visual/mv_008.jpg',
+      'sozai/main_visual/mv_009.jpg',
+      'sozai/main_visual/mv_010.jpg',
+      'sozai/main_visual/mv_011.jpg',
+      'sozai/main_visual/mv_012.jpg',
+      'sozai/main_visual/mv_013.jpg',
+      'sozai/main_visual/mv_014.jpg',
+      'sozai/main_visual/mv_015.jpg',
+      'sozai/main_visual/mv_016.jpg',
+    ];
+
+    // シャッフルして4枚ピック（アトモスフィア用に5枚目も）
+    const shuffled = ALL_PHOTOS.sort(() => Math.random() - 0.5);
+    const picked = shuffled.slice(0, 4);
+
+    // アトモスフィアセクション：SWV写真からランダムで1枚（スライドと別プール）
+    const ATMO_PHOTOS = [
+      'sozai/main_visual/mv_009.jpg',
+      'sozai/main_visual/mv_010.jpg',
+      'sozai/main_visual/mv_011.jpg',
+      'sozai/main_visual/mv_012.jpg',
+      'sozai/main_visual/mv_013.jpg',
+      'sozai/main_visual/mv_014.jpg',
+      'sozai/main_visual/mv_015.jpg',
+      'sozai/main_visual/mv_016.jpg',
+    ];
+    const atmoImg = document.getElementById('atmo-img');
+    if (atmoImg) {
+      const atmoRandom = ATMO_PHOTOS[Math.floor(Math.random() * ATMO_PHOTOS.length)];
+      atmoImg.src = atmoRandom;
+      atmoImg.onerror = () => { atmoImg.src = 'sozai/main_visual/mv_009.jpg'; };
+    }
+
+    // Specラベルをランダムカラー
+    const specLabel = document.getElementById('spec-label');
+    if (specLabel) {
+      const colors = ['var(--blue)', 'var(--yellow)', 'var(--red)'];
+      specLabel.style.color = colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    const slides = document.querySelectorAll('.hero-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    let current = 0;
+    let timer;
+
+    // ランダム写真をセット
+    slides.forEach((slide, i) => {
+      slide.style.backgroundImage = `url('${picked[i]}')`;
+    });
+
+    function goToSlide(n) {
+      slides[current].classList.remove('active');
+      indicators[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      indicators[current].classList.add('active');
+      clearInterval(timer);
+      timer = setInterval(nextSlide, 5000);
+    }
+
+    function nextSlide() {
+      goToSlide((current + 1) % slides.length);
+    }
+
+    timer = setInterval(nextSlide, 5000);
+  </script>
+
+</body>
+</html>
