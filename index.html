@@ -502,6 +502,27 @@
       line-height: 1.1;
     }
 
+    /* ===================== INSTAGRAM ===================== */
+    .instagram {
+      padding: 100px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .instagram-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .instagram-heading {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: clamp(20px, 3vw, 28px);
+      letter-spacing: 0.2em;
+      font-weight: 300;
+      color: var(--white);
+    }
+    @media (max-width: 900px) {
+      .instagram { padding: 80px 24px; }
+    }
+
     /* ===================== SPEC ===================== */
     .spec {
       padding: 100px 48px;
@@ -936,11 +957,26 @@
 
   <!-- ATMOSPHERE -->
   <section class="atmosphere">
-    <img id="atmo-img" src="sozai/main_visual/mv_001.jpg" alt="どんなスタイルでも">
+    <img id="atmo-img" src="sozai/main_visual/mv_015.jpg" alt="どんなスタイルでも">
     <div class="atmosphere-text">
       <p class="atmosphere-catch">どんなスタイルでも</p>
       <h2 class="atmosphere-main">濡れて馴染む、<br>キメて残る。</h2>
     </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="instagram">
+    <div class="instagram-header">
+      <p class="section-label" style="color:var(--blue)">— Instagram</p>
+      <h2 class="instagram-heading">@swave.style</h2>
+    </div>
+    <behold-widget feed-id="mgna3Iu9Zl6y9YPc2DnV"></behold-widget>
+    <script>
+      (() => {
+        const d=document,s=d.createElement("script");s.type="module";
+        s.src="https://w.behold.so/widget.js";d.head.append(s);
+      })();
+    </script>
   </section>
 
   <!-- SPEC -->
@@ -1116,23 +1152,6 @@
     const shuffled = ALL_PHOTOS.sort(() => Math.random() - 0.5);
     const picked = shuffled.slice(0, 4);
 
-    // アトモスフィアセクション：SWV写真からランダムで1枚（スライドと別プール）
-    const ATMO_PHOTOS = [
-      'sozai/main_visual/mv_009.jpg',
-      'sozai/main_visual/mv_010.jpg',
-      'sozai/main_visual/mv_011.jpg',
-      'sozai/main_visual/mv_012.jpg',
-      'sozai/main_visual/mv_013.jpg',
-      'sozai/main_visual/mv_014.jpg',
-      'sozai/main_visual/mv_015.jpg',
-      'sozai/main_visual/mv_016.jpg',
-    ];
-    const atmoImg = document.getElementById('atmo-img');
-    if (atmoImg) {
-      const atmoRandom = ATMO_PHOTOS[Math.floor(Math.random() * ATMO_PHOTOS.length)];
-      atmoImg.src = atmoRandom;
-      atmoImg.onerror = () => { atmoImg.src = 'sozai/main_visual/mv_009.jpg'; };
-    }
 
     // Specラベルをランダムカラー
     const specLabel = document.getElementById('spec-label');
